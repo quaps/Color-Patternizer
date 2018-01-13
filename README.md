@@ -10,7 +10,9 @@ Receives OSC messages in the range of 1-5, which are mapped to various color sch
 
 Schemes:
 IMI: Color schemes inspired by Imi Knoebel
+
 RYB: Inspired by the primary color scheme of Rodchenko's Who's Afraid of Red, Yellow, & Blue?
+
 KlEE: A pattern weaver of symbols inspired by Paul Klee's landscapes
 
 
