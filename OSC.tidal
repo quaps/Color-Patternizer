@@ -1,0 +1,33 @@
+import Sound.Tidal.OscStream
+
+let myShape = Shape {
+      params = [ I "num1" Nothing,
+                 I "num2" Nothing,
+                 I "num3" Nothing
+               ],
+      cpsStamp = True,
+      latency = 0
+      }
+    mySlang = OscSlang {
+      path = "/note",
+      timestamp = NoStamp,
+      namedParams = False,
+      preamble = []
+      }
+    myStream = do
+      s <- makeConnection "127.0.0.1" 8010 mySlang
+      stream (Backend s $ (\_ _ _ -> return ())) myShape
+    num1       = makeI myShape "num1"
+    num2       = makeI myShape "num2"
+    num3       = makeI myShape "num3"
+
+s1 <- myStream
+s2 <- myStream
+
+s1 $ fast 3 $ num1 "1 2 3 4 5" # num2 "1 3" # num3 "1 2 3"
+
+s1 $ every 3 (fast 7) $ num1 "[1 2 3] [4 5] 4 5" # num2 "5 4" # num3 "4 5 4"
+
+hush
+
+s1 silence
